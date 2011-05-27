@@ -1,20 +1,21 @@
 #pragma once
 #include <Prelude/CountedList.hpp>
 #include <Prelude/Region.hpp>
-#include "../include/Canvas.hpp"
+#include <Prelude/Map.hpp>
+#include "../include/Reindeer/Canvas.hpp"
 
 namespace Reindeer
 {
 	class Texture;
 
-	class Object
+	template<class Source, class Mask> class Object
 	{
 	public:
 		Prelude::ListEntry<Object> entry;
 	};
 
-	class ObjectList:
-		public Prelude::CountedList<Object>
+	template<class Source, class Mask> class ObjectList:
+		public Prelude::CountedList<Object<Source, Mask>>
 	{
 	public:
 		ObjectList(RegionAllocator::ReferenceProvider::Reference allocator = RegionAllocator::ReferenceProvider::DefaultReference::reference)
@@ -27,6 +28,7 @@ namespace Reindeer
 		PriorityTexture,
 		PriorityRecord,
 		PriorityUniform,
+		PriorityNone
 	};
 
 	template<class K, class V, class T = Prelude::MapFunctions<K ,V>> class Map:
@@ -39,11 +41,11 @@ namespace Reindeer
 		{
 		}
 		
-		V *get_create(K key)
+		V &get_create(K key)
 		{
-			return Parent::get_create(key, [&]() -> V * {
-				RegionAllocator::ReferenceProvider::ReferenceClass region(get_allocator());
-				return new (region.allocate(sizeof(V))) V(get_allocator());
+			return *Parent::get_create(key, [&]() -> V * {
+				RegionAllocator::ReferenceProvider::ReferenceClass region(this->Parent::get_allocator());
+				return new (region.allocate(sizeof(V))) V(this->Parent::get_allocator());
 			});
 		}
 			

@@ -11,13 +11,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Canvas.cpp" />
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Reindeer\Canvas.hpp" />
+    <ClInclude Include="..\include\Reindeer\Color.hpp" />
     <ClInclude Include="..\src\Common.hpp" />
     <ClInclude Include="..\src\CompositeCanvas.hpp" />
+    <ClInclude Include="..\src\MaskNone.hpp" />
+    <ClInclude Include="..\src\MaskSolid.hpp" />
     <ClInclude Include="..\src\MaskTexture.hpp" />
+    <ClInclude Include="..\src\SourceSolid.hpp" />
     <ClInclude Include="..\src\SourceTexture.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

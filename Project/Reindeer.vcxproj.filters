@@ -7,16 +7,19 @@
     <Filter Include="include">
       <UniqueIdentifier>{df16dd3e-55c0-497c-be9f-3ae2d34d0e99}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\Reindeer">
+      <UniqueIdentifier>{b0af6f7a-e359-4ed9-acb8-aa2e0e2a395a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Canvas.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\Reindeer\Canvas.hpp">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Common.hpp">
       <Filter>src</Filter>
     </ClInclude>
@@ -27,6 +30,21 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\SourceTexture.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MaskNone.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Reindeer\Color.hpp">
+      <Filter>include\Reindeer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Reindeer\Canvas.hpp">
+      <Filter>include\Reindeer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\SourceSolid.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MaskSolid.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

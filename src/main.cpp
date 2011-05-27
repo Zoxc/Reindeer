@@ -12,5 +12,5 @@ Reindeer::Canvas canvas(region);
 
 int main()
 {
-		return 0;
+	return 0;
 }
