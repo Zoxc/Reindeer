@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Reindeer", "Reindeer.vcxproj", "{DE33AF95-3FF0-40BD-B823-F2B9B5FC077F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{10D74569-D94E-4362-93A7-24C327C9766B} = {10D74569-D94E-4362-93A7-24C327C9766B}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Prelude", "..\..\Prelude\Project\Prelude.vcxproj", "{10D74569-D94E-4362-93A7-24C327C9766B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE33AF95-3FF0-40BD-B823-F2B9B5FC077F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DE33AF95-3FF0-40BD-B823-F2B9B5FC077F}.Debug|Win32.Build.0 = Debug|Win32
+		{DE33AF95-3FF0-40BD-B823-F2B9B5FC077F}.Release|Win32.ActiveCfg = Release|Win32
+		{DE33AF95-3FF0-40BD-B823-F2B9B5FC077F}.Release|Win32.Build.0 = Release|Win32
+		{10D74569-D94E-4362-93A7-24C327C9766B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{10D74569-D94E-4362-93A7-24C327C9766B}.Debug|Win32.Build.0 = Debug|Win32
+		{10D74569-D94E-4362-93A7-24C327C9766B}.Release|Win32.ActiveCfg = Release|Win32
+		{10D74569-D94E-4362-93A7-24C327C9766B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
