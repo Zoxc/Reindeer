@@ -1,27 +1,12 @@
 #pragma once
-#include <Prelude/CountedList.hpp>
 #include <Prelude/Region.hpp>
 #include <Prelude/Map.hpp>
+#include "GL.hpp"
 #include "../include/Reindeer/Canvas.hpp"
 
 namespace Reindeer
 {
 	class Texture;
-
-	template<class Source, class Mask> class Object
-	{
-	public:
-		Prelude::ListEntry<Object> entry;
-	};
-
-	template<class Source, class Mask> class ObjectList:
-		public Prelude::CountedList<Object<Source, Mask>>
-	{
-	public:
-		ObjectList(RegionAllocator::ReferenceProvider::Reference allocator = RegionAllocator::ReferenceProvider::DefaultReference::reference)
-		{
-		}
-	};
 
 	enum Priority
 	{
@@ -50,4 +35,6 @@ namespace Reindeer
 		}
 			
 	};
+
+	void initialize(int width, int height);
 };

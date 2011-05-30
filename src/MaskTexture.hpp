@@ -9,6 +9,21 @@ namespace Reindeer
 		typedef Texture *ArgumentType;
 		
 		const static Priority priority = PriorityTexture;
+		
+		const static char *vertex_code;
+		const static char *vertex_main;
+
+		const static char *fragment_code;
+		const static char *fragment_main;
+		
+		struct ObjectData
+		{
+			ObjectData(Texture *texture) {}
+		};
+		
+		struct State {};
+		
+		static void initialize_state(State &state, GLuint program) {};
 
 		template<class Inner> struct Map
 		{

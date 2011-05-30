@@ -12,10 +12,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\main.cpp">
+    <ClCompile Include="..\src\Canvas.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Canvas.cpp">
+    <ClCompile Include="..\src\Common.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\GL.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MaskNone.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MaskSolid.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MaskTexture.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SourceTexture.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\SourceSolid.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -46,6 +64,18 @@
     </ClInclude>
     <ClInclude Include="..\src\MaskSolid.hpp">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Object.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CanvasFriend.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GL.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Reindeer\Reindeer.hpp">
+      <Filter>include\Reindeer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

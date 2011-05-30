@@ -10,8 +10,8 @@ namespace Reindeer
 	{
 		enum Type
 		{
-			Copy,
-			Over
+			Over,
+			Count
 		};
 	};
 	
@@ -51,8 +51,6 @@ namespace Reindeer
 	class Canvas
 	{
 	private:
-		RegionAllocator &region;
-		
 		Source::Type source_type;
 		Mask::Type mask_type;
 		
@@ -65,6 +63,8 @@ namespace Reindeer
 		void *canvas_map[Source::Count * Mask::Count];
 
 	public:
+		RegionAllocator &region;
+
 		Canvas(RegionAllocator &region) : region(region)
 		{
 		}
