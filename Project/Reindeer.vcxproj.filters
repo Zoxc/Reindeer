@@ -36,6 +36,15 @@
     <ClCompile Include="..\src\SourceSolid.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ContentSerializer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Layer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\LayerContext.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Common.hpp">
@@ -75,6 +84,18 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Reindeer\Reindeer.hpp">
+      <Filter>include\Reindeer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ContentSerializer.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Layer.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Reindeer\Layer.hpp">
+      <Filter>include\Reindeer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Reindeer\LayerContext.hpp">
       <Filter>include\Reindeer</Filter>
     </ClInclude>
   </ItemGroup>

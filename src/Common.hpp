@@ -15,6 +15,14 @@ namespace Reindeer
 		PriorityUniform,
 		PriorityNone
 	};
+	
+	struct Rect
+	{
+		int x;
+		int y;
+		int width;
+		int height;
+	};
 
 	template<class K, class V, class T = Prelude::MapFunctions<K ,V>> class Map:
 		public Prelude::Map<K, V *, RegionAllocator, T>

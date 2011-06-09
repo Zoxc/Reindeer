@@ -44,6 +44,11 @@ namespace Reindeer
 		{
 			return canvas.mask_type;
 		}
+		
+		static RegionAllocator &get_region(Canvas &canvas)
+		{
+			return canvas.region;
+		}
 
 		template<template<typename> class T, typename Arg1, typename Arg2> static void source_dispatch(Source::Type source, Arg1 arg1, Arg2 arg2)
 		{

@@ -6,10 +6,6 @@
 
 using namespace Prelude;
 
-Region<> region;
-
-Reindeer::Canvas canvas(region);
-
 const int width = 800;
 const int height = 480;
 
@@ -24,6 +20,17 @@ int main()
 	}
 
 	Reindeer::initialize(width, height);
+	
+	Reindeer::LayerContext context;
+
+	auto canvas = context.add_layer();
+	
+	canvas.set_source(Reindeer::color_white);
+	canvas.set_mask(Reindeer::alpha_opaque);
+
+	canvas.rect(10, 10, 20, 20);
+
+	auto layer = context.render();
 	
 	struct swl_event event;
 
@@ -40,6 +47,8 @@ int main()
 				break;
 			};
 		}
+
+		layer->render();
 		
 		swl_swap();
 	}

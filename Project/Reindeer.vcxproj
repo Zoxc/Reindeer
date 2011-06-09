@@ -13,7 +13,10 @@
   <ItemGroup>
     <ClCompile Include="..\src\Canvas.cpp" />
     <ClCompile Include="..\src\Common.cpp" />
+    <ClCompile Include="..\src\ContentSerializer.cpp" />
     <ClCompile Include="..\src\GL.cpp" />
+    <ClCompile Include="..\src\Layer.cpp" />
+    <ClCompile Include="..\src\LayerContext.cpp" />
     <ClCompile Include="..\src\MaskNone.cpp" />
     <ClCompile Include="..\src\MaskSolid.cpp" />
     <ClCompile Include="..\src\MaskTexture.cpp" />
@@ -23,11 +26,15 @@
   <ItemGroup>
     <ClInclude Include="..\include\Reindeer\Canvas.hpp" />
     <ClInclude Include="..\include\Reindeer\Color.hpp" />
+    <ClInclude Include="..\include\Reindeer\Layer.hpp" />
+    <ClInclude Include="..\include\Reindeer\LayerContext.hpp" />
     <ClInclude Include="..\include\Reindeer\Reindeer.hpp" />
     <ClInclude Include="..\src\CanvasFriend.hpp" />
     <ClInclude Include="..\src\Common.hpp" />
     <ClInclude Include="..\src\CompositeCanvas.hpp" />
+    <ClInclude Include="..\src\ContentSerializer.hpp" />
     <ClInclude Include="..\src\GL.hpp" />
+    <ClInclude Include="..\src\Layer.hpp" />
     <ClInclude Include="..\src\MaskNone.hpp" />
     <ClInclude Include="..\src\MaskSolid.hpp" />
     <ClInclude Include="..\src\MaskTexture.hpp" />

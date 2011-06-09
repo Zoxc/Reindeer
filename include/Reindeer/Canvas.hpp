@@ -1,5 +1,6 @@
 #pragma once
 #include <Prelude/Region.hpp>
+#include <Prelude/List.hpp>
 #include "Color.hpp"
 
 namespace Reindeer
@@ -39,18 +40,17 @@ namespace Reindeer
 	class Texture;
 
 	struct CanvasFriend;
+	class LayerContext;
 	
-	struct Rect
-	{
-		int x;
-		int y;
-		int width;
-		int height;
-	};
-
+	class ContentMeasurer;
+	class ContentSerializer;
+	
 	class Canvas
 	{
 	private:
+		LayerContext &context;
+		RegionAllocator &region;
+
 		Source::Type source_type;
 		Mask::Type mask_type;
 		
@@ -59,15 +59,16 @@ namespace Reindeer
 		
 		color_t source_color;
 		color_t mask_color;
+		
+		Prelude::ListEntry<Canvas> entry;
+		
+		void measure(ContentMeasurer &measurer);
+		void serialize(ContentSerializer &serializer);
 
 		void *canvas_map[Source::Count * Mask::Count];
 
 	public:
-		RegionAllocator &region;
-
-		Canvas(RegionAllocator &region) : region(region)
-		{
-		}
+		Canvas(LayerContext &context);
 		
 		void set_source(color_t color);
 		void set_source(Texture *texture);
@@ -77,7 +78,9 @@ namespace Reindeer
 		void clear_mask();
 
 		void rect(int x, int y, int width, int height);
-
+		
 		friend struct CanvasFriend;
+		friend class LayerContext;
+		
 	};
 };

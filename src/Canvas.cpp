@@ -1,4 +1,5 @@
 #include "CanvasFriend.hpp"
+#include "../include/Reindeer/LayerContext.hpp"
 
 namespace Reindeer
 {
@@ -13,7 +14,7 @@ namespace Reindeer
 
 			auto object_list = composite_canvas.get_list(source, mask);
 
-			auto object = new (canvas.region) Object<Source, Mask>(source, mask, rect);
+			auto object = new (CanvasFriend::get_region(canvas)) Object<Source, Mask>(source, mask, rect);
 
 			object_list.append(object);
 		}
@@ -26,6 +27,10 @@ namespace Reindeer
 			CanvasFriend::mask_dispatch<MaskDestionation, Source, Canvas &, Rect &>(CanvasFriend::get_mask_type(canvas), canvas, rect);
 		}
 	};
+
+	Canvas::Canvas(LayerContext &context) : context(context), region(context.region)
+	{
+	}
 	
 	void Canvas::set_source(color_t color)
 	{
