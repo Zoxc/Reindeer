@@ -1,6 +1,6 @@
 include $(root)/src/Makefile.shared
 
-LIBS += Reindeer GLESv2
+LIBS += Reindeer
 
 .PHONY: Reindeer 
 Reindeer:
@@ -10,5 +10,5 @@ Reindeer:
 Reindeer-clean:
 	$(MAKE) -C $(root)/src clean
 
-INCLUDE_DIRS += $(root)
+INCLUDE_DIRS += $(root)/include
 LIB_DIRS += $(root)/src

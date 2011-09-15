@@ -6,7 +6,7 @@ AR = $(CROSS_COMPILE)ar
 
 BUILD_DIRS += .
 CFLAGS += -pipe -Wall
-CXXFLAGS += -Wno-invalid-offsetof -std=gnu++98
+CXXFLAGS += -Wno-invalid-offsetof -std=gnu++0x
 
 ifeq ($(CFG),release)
 CFLAGS += -O3 -s

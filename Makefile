@@ -1,7 +1,7 @@
 root=.
 default: all
 
-BUILD_DIRS += 
+BUILD_DIRS += Demo
 
 include $(root)/src/Makefile.public
 include $(root)/swl/Makefile.public
