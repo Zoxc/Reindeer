@@ -7,8 +7,10 @@ namespace Reindeer
 	{
 	public:
 		typedef void *ArgumentType;
-
+		
 		const static Priority priority = PriorityNone;
+
+		const static Mask::Type type = Mask::None;
 		
 		const static char *vertex_code;
 		const static char *vertex_main;

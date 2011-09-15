@@ -1,8 +1,10 @@
 #pragma once
 #include <string>
 #include "../include/Reindeer/Canvas.hpp"
+#include "../include/Reindeer/Layer.hpp"
 #include "Common.hpp"
 #include "Object.hpp"
+#include "ContentSerializer.hpp"
 
 namespace Reindeer
 {
@@ -38,8 +40,43 @@ namespace Reindeer
 		typename Conditional::Map map;
 
 	public:
+		class Content:
+			public Layer::Content
+		{
+			public:
+				void render(ContentWalker &walker)
+				{
+					walker.read_object<Content>();
+				}
+
+				void deallocate(ContentWalker &walker)
+				{
+					walker.read_object<Content>();
+				}
+		};
+
 		CompositeCanvas(RegionAllocator &region) : map(region)
 		{
+		}
+		
+		void measure(ContentMeasurer &measurer)
+		{
+			measurer.count_objects<Content>(1);
+			
+			// TODO: Add a conditional for debug test
+
+			measurer.count_objects<size_t>(1); // Magic
+		}
+
+		void serialize(ContentSerializer &serializer)
+		{
+			serializer.write_object<Content>();
+			
+			// TODO: Add a conditional for debug test
+
+			size_t &magic = serializer.write_object<size_t>();
+
+			magic = 0xBEEF;
 		}
 
 		ObjectList<Source, Mask> &get_list(typename Source::ArgumentType source, typename Mask::ArgumentType mask)

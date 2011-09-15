@@ -7,7 +7,7 @@ namespace Reindeer
 	{
 		static void func(Canvas &canvas, Rect &rect)
 		{
-			auto composite_canvas = CanvasFriend::get_composite_canvas<Source, Mask>(canvas);
+			auto composite_canvas = *CanvasFriend::get_composite_canvas<Source, Mask, true>(canvas);
 			
 			Source::ArgumentType source = CanvasFriend::get_source_state<Source>(canvas);
 			Mask::ArgumentType mask = CanvasFriend::get_mask_state<Mask>(canvas);
@@ -30,6 +30,7 @@ namespace Reindeer
 
 	Canvas::Canvas(LayerContext &context) : context(context), region(context.region)
 	{
+		std::memset(canvas_map, 0, sizeof(void *) * Source::Count * Mask::Count);
 	}
 	
 	void Canvas::set_source(color_t color)
@@ -67,5 +68,59 @@ namespace Reindeer
 		rect.height = height;
 
 		CanvasFriend::source_dispatch<SourceDestination, Canvas &, Rect &>(source_type, *this, rect);
+	}
+	
+	void initialize(int width, int height)
+	{
+	}
+	
+	template<class Source, class Mask> struct MeasureMaskDestionation
+	{
+		static void func(Canvas &canvas, ContentMeasurer &measurer)
+		{
+			auto composite_canvas = CanvasFriend::get_composite_canvas<Source, Mask, false>(canvas);
+
+			composite_canvas->measure(measurer);
+		}
+	};
+
+	template<class Source> struct MeasureSourceDestination
+	{
+		static void func(Canvas &canvas, ContentMeasurer &measurer)
+		{
+			for(size_t mask = Mask::None; mask < Mask::Count; ++mask)
+				CanvasFriend::mask_dispatch<MeasureMaskDestionation, Source, Canvas &, ContentMeasurer &>((Mask::Type)mask, canvas, measurer);
+		}
+	};
+	
+	void Canvas::measure(ContentMeasurer &measurer)
+	{
+		for(size_t source = Source::Solid; source < Source::Count; ++source)
+			CanvasFriend::source_dispatch<MeasureSourceDestination, Canvas &, ContentMeasurer &>((Source::Type)source, *this, measurer);
+	}
+	
+	template<class Source, class Mask> struct SerializeMaskDestionation
+	{
+		static void func(Canvas &canvas, ContentSerializer &serializer)
+		{
+			auto composite_canvas = CanvasFriend::get_composite_canvas<Source, Mask, false>(canvas);
+
+			composite_canvas->serialize(serializer);
+		}
+	};
+
+	template<class Source> struct SerializeSourceDestination
+	{
+		static void func(Canvas &canvas, ContentSerializer &serializer)
+		{
+			for(size_t mask = Mask::None; mask < Mask::Count; ++mask)
+				CanvasFriend::mask_dispatch<SerializeMaskDestionation, Source, Canvas &, ContentSerializer &>((Mask::Type)mask, canvas, serializer);
+		}
+	};
+	
+	void Canvas::serialize(ContentSerializer &serializer)
+	{
+		for(size_t source = Source::Solid; source < Source::Count; ++source)
+			CanvasFriend::source_dispatch<SerializeSourceDestination, Canvas &, ContentSerializer &>((Source::Type)source, *this, serializer);
 	}
 };

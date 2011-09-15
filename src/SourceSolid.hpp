@@ -9,6 +9,8 @@ namespace Reindeer
 		typedef color_t ArgumentType;
 
 		const static Priority priority = PriorityUniform;
+
+		const static Source::Type type = Source::Solid;
 		
 		const static char *vertex_code;
 		const static char *vertex_main;

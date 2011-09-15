@@ -11,7 +11,7 @@ const int height = 480;
 
 int main()
 {
-	enum swl_result result = swl_init("CubeLand", width, height);
+	enum swl_result result = swl_init("Reindeer Demo", width, height);
 
 	if(result != SWLR_OK)
 	{
@@ -23,11 +23,11 @@ int main()
 	
 	Reindeer::LayerContext context;
 
-	auto canvas = context.add_layer();
+	auto &canvas = context.add_layer();
 	
 	canvas.set_source(Reindeer::color_white);
 	canvas.set_mask(Reindeer::alpha_opaque);
-
+	
 	canvas.rect(10, 10, 20, 20);
 
 	auto layer = context.render();

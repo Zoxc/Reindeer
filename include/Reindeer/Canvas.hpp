@@ -69,6 +69,8 @@ namespace Reindeer
 
 	public:
 		Canvas(LayerContext &context);
+
+		//TODO: Remove copy constructor
 		
 		void set_source(color_t color);
 		void set_source(Texture *texture);

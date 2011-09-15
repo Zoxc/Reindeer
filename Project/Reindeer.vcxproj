@@ -34,7 +34,6 @@
     <ClInclude Include="..\src\CompositeCanvas.hpp" />
     <ClInclude Include="..\src\ContentSerializer.hpp" />
     <ClInclude Include="..\src\GL.hpp" />
-    <ClInclude Include="..\src\Layer.hpp" />
     <ClInclude Include="..\src\MaskNone.hpp" />
     <ClInclude Include="..\src\MaskSolid.hpp" />
     <ClInclude Include="..\src\MaskTexture.hpp" />

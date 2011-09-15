@@ -83,19 +83,19 @@ namespace Reindeer
 			};
 		}
 
-		template<class Source, class Mask> static CompositeCanvas<Source, Mask> & get_composite_canvas(Canvas &canvas)
+		template<class Source, class Mask, bool create> static CompositeCanvas<Source, Mask> *get_composite_canvas(Canvas &canvas)
 		{
-			size_t index = canvas.mask_type * Reindeer::Mask::Count + canvas.source_type;
-
+			size_t index = Mask::type * Reindeer::Mask::Count + Source::type;
+			
 			auto result = (CompositeCanvas<Source, Mask> *)canvas.canvas_map[index];
 
-			if(!result)
+			if(!result && create)
 			{
 				result = new (canvas.region) CompositeCanvas<Source, Mask>(canvas.region);
 				canvas.canvas_map[index] = (void *)result;
 			}
 
-			return *result;
+			return result;
 		}
 	};
 };

@@ -9,6 +9,8 @@ namespace Reindeer
 		typedef Texture *ArgumentType;
 		
 		const static Priority priority = PriorityTexture;
+
+		const static Mask::Type type = Mask::Texture;
 		
 		const static char *vertex_code;
 		const static char *vertex_main;
