@@ -1,0 +1,9 @@
+**/Makefile.conf
+src/debug
+src/release
+debug
+release
+Demo/Debug
+Demo/Release
+Project/Debug
+Project/Release
