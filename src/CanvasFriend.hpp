@@ -13,33 +13,8 @@ namespace Reindeer
 	{
 		template<class Source> static typename Source::ArgumentType get_source_state(Canvas &canvas);
 		
-		template<> static typename SourceSolid::ArgumentType get_source_state<SourceSolid>(Canvas &canvas)
-		{
-			return canvas.source_color;
-		}
-
-		template<> static typename SourceTexture::ArgumentType get_source_state<SourceTexture>(Canvas &canvas)
-		{
-			return canvas.source_texture;
-		}
-
 		template<class Mask> static typename Mask::ArgumentType get_mask_state(Canvas &canvas);
 		
-		template<> static typename MaskNone::ArgumentType get_mask_state<MaskNone>(Canvas &canvas)
-		{
-			return nullptr;
-		}
-		
-		template<> static typename MaskSolid::ArgumentType get_mask_state<MaskSolid>(Canvas &canvas)
-		{
-			return canvas.mask_color;
-		}
-
-		template<> static typename MaskTexture::ArgumentType get_mask_state<MaskTexture>(Canvas &canvas)
-		{
-			return canvas.mask_texture;
-		}
-
 		static Mask::Type get_mask_type(Canvas &canvas)
 		{
 			return canvas.mask_type;
@@ -98,4 +73,29 @@ namespace Reindeer
 			return result;
 		}
 	};
+	
+	template<> typename SourceSolid::ArgumentType CanvasFriend::get_source_state<SourceSolid>(Canvas &canvas)
+	{
+		return canvas.source_color;
+	}
+
+	template<> typename SourceTexture::ArgumentType CanvasFriend::get_source_state<SourceTexture>(Canvas &canvas)
+	{
+		return canvas.source_texture;
+	}
+	
+	template<> typename MaskNone::ArgumentType CanvasFriend::get_mask_state<MaskNone>(Canvas &canvas)
+	{
+		return nullptr;
+	}
+		
+	template<> typename MaskSolid::ArgumentType CanvasFriend::get_mask_state<MaskSolid>(Canvas &canvas)
+	{
+		return canvas.mask_color;
+	}
+
+	template<> typename MaskTexture::ArgumentType CanvasFriend::get_mask_state<MaskTexture>(Canvas &canvas)
+	{
+		return canvas.mask_texture;
+	}
 };

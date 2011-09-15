@@ -9,8 +9,8 @@ namespace Reindeer
 		{
 			auto composite_canvas = *CanvasFriend::get_composite_canvas<Source, Mask, true>(canvas);
 			
-			Source::ArgumentType source = CanvasFriend::get_source_state<Source>(canvas);
-			Mask::ArgumentType mask = CanvasFriend::get_mask_state<Mask>(canvas);
+			typename Source::ArgumentType source = CanvasFriend::get_source_state<Source>(canvas);
+			typename Mask::ArgumentType mask = CanvasFriend::get_mask_state<Mask>(canvas);
 
 			auto object_list = composite_canvas.get_list(source, mask);
 

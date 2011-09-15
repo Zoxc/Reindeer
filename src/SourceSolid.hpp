@@ -44,7 +44,7 @@ namespace Reindeer
 			static void measure(Type &map, ContentMeasurer &measurer)
 			{
 				measurer.count_map<color_t>(map, [&](color_t key, typename Inner::Type &value) {
-						//Inner::measure(value, measurer);
+						Inner::measure(value, measurer);
 				});
 			}
 
@@ -55,7 +55,7 @@ namespace Reindeer
 
 						color = key;
 
-						Inner::serialize(value, measurer);
+						Inner::serialize(value, serializer);
 				});
 			}
 		};

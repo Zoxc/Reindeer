@@ -11,7 +11,7 @@ namespace Reindeer
 	template<class Source, class Mask, bool Conditional> struct ConditionalCanvas
 	{
 		typedef typename Mask::template Map<ObjectList<Source, Mask> > MaskMap;
-		typedef typename Source::template Map<typename MaskMap> SourceMap;
+		typedef typename Source::template Map<MaskMap> SourceMap;
 		typedef typename SourceMap::Type Map;
 		
 		static ObjectList<Source, Mask> &get_list(Map &map, typename Source::ArgumentType source, typename Mask::ArgumentType mask)
@@ -32,7 +32,7 @@ namespace Reindeer
 	template<class Source, class Mask> struct ConditionalCanvas<Source, Mask, false>
 	{
 		typedef typename Source::template Map<ObjectList<Source, Mask> > SourceMap;
-		typedef typename Mask::template Map<typename SourceMap> MaskMap;
+		typedef typename Mask::template Map<SourceMap> MaskMap;
 		typedef typename MaskMap::Type Map;
 
 		static ObjectList<Source, Mask> &get_list(Map &map, typename Source::ArgumentType source, typename Mask::ArgumentType mask)
