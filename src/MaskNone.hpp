@@ -36,12 +36,14 @@ namespace Reindeer
 				return inner;
 			}
 
-			static void measure(Type &map, ContentMeasurer &measurer)
+			static void measure(Type &inner, ContentMeasurer &measurer)
 			{
+				Inner::measure(inner, measurer);
 			}
 
-			static void serialize(Type &map, ContentSerializer &serializer)
+			static void serialize(Type &inner, ContentSerializer &serializer)
 			{
+				Inner::serialize(inner, serializer);
 			}
 		};
 	};

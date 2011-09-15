@@ -44,19 +44,19 @@ namespace Reindeer
 			
 			static void measure(Type &map, ContentMeasurer &measurer)
 			{
-				measurer.count_map<color_t>(map, [&](color_t key, typename Inner::Type &value) {
-						Inner::measure(value, measurer);
+				measurer.count_map<color_t>(map, [&](color_t key, typename Inner::Type *value) {
+						Inner::measure(*value, measurer);
 				});
 			}
 
 			static void serialize(Type &map, ContentSerializer &serializer)
 			{
-				serializer.write_map([&](color_t key, typename Inner::Type &value) {
+				serializer.write_map([&](color_t key, typename Inner::Type *value) {
 						color_t &color = serializer.write_object<color_t>();
 
 						color = key;
 
-						Inner::serialize(value, serializer);
+						Inner::serialize(*value, serializer);
 				});
 			}
 		};
