@@ -1,5 +1,6 @@
 #pragma once
 #include "Common.hpp"
+#include "ContentSerializer.hpp"
 
 namespace Reindeer
 {

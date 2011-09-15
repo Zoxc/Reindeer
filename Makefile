@@ -7,7 +7,7 @@ include $(root)/src/Makefile.public
 include $(root)/swl/Makefile.public
 include $(root)/Makefile.common
 
-TARGET = $(CFG)/demo
+TARGET = $(CFG)/reindeer-demo
 
 SOURCES = \
 	Demo/main.cpp \
