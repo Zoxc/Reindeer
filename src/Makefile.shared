@@ -1,0 +1,2 @@
+include $(root)/Prelude/Makefile.public
+include $(root)/GLee/Makefile.public

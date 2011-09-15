@@ -1,0 +1,33 @@
+-include $(root)/Makefile.conf
+
+CC = $(CROSS_COMPILE)gcc
+CXX = $(CROSS_COMPILE)g++
+AR = $(CROSS_COMPILE)ar
+
+BUILD_DIRS += .
+CFLAGS += -pipe -Wall
+CXXFLAGS += -Wno-invalid-offsetof -std=gnu++98
+
+ifeq ($(CFG),release)
+CFLAGS += -O3 -s
+else
+CFLAGS += -g
+CFG=debug
+endif
+
+CFLAGS += $(patsubst %, -D%, $(DEFINES))
+CFLAGS += $(patsubst %, -I%, $(INCLUDE_DIRS))
+LDFLAGS += $(patsubst %, -L%/$(CFG), $(LIB_DIRS))
+LDFLAGS += $(patsubst %, -l%, $(LIBS))
+
+$(CFG)/%.o: %.c
+	@echo Building $< for $(CFG)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+
+$(CFG)/%.o: %.cpp
+	@echo Building $< for $(CFG)
+	@$(CXX) $(CFLAGS) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+
+.PHONY: build-dirs 
+build-dirs:
+	@dirs='$(BUILD_DIRS)'; for d in $$dirs ; do mkdir -p "$(CFG)/$$d" ; done

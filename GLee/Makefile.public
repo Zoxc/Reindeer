@@ -1,0 +1,6 @@
+-include $(root)/GLee/Makefile.conf
+
+LIBS += $(LIBGLEE_NAME)
+
+CFLAGS += $(LIBGLEE_CFLAGS)
+LDFLAGS += $(LIBGLEE_LDFLAGS)

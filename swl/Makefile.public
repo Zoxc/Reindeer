@@ -1,0 +1,6 @@
+-include $(root)/swl/Makefile.conf
+
+LIBS += swl
+
+CFLAGS += $(LIBSWL_CFLAGS)
+LDFLAGS += $(LIBSWL_LDFLAGS)
