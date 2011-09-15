@@ -29,11 +29,19 @@ namespace Reindeer
 
 		template<class Inner> struct Map
 		{
-			typedef typename Reindeer::Map<alpha_t, Inner> Type;
+			typedef typename Reindeer::Map<alpha_t, typename Inner::Type> Type;
 			
-			static Inner &resolve(Type map, alpha_t alpha)
+			static typename Inner::Type &resolve(Type &map, alpha_t alpha)
 			{
 				return map.get_create(alpha);
+			}
+
+			static void measure(Type &map, ContentMeasurer &measurer)
+			{
+			}
+
+			static void serialize(Type &map, ContentSerializer &serializer)
+			{
 			}
 		};
 	};

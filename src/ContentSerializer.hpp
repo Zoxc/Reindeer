@@ -14,10 +14,17 @@ namespace Reindeer
 		ContentMeasurer();
 
 		void count_lists(size_t count);
-
+		
 		template<class T> void count_objects(size_t count)
 		{
 			size += sizeof(T) * count;
+		}
+		
+		template<class T, class Map, typename func> void count_map(Map &map, func each_pair)
+		{
+			size += sizeof(size_t) + sizeof(T) * map.get_entries();
+
+			map.each_pair(each_pair);
 		}
 		
 		size_t get_size();
@@ -32,6 +39,13 @@ namespace Reindeer
 
 		void write_list(size_t list_entries);
 		char *get_position();
+		
+		template<class Map, typename func> void write_map(const Map &map, func each_pair)
+		{
+			write_list(map.get_entries());
+
+			map.each_pair(each_pair);
+		}
 		
 		template<class T> T &write_object()
 		{

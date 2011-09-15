@@ -21,7 +21,17 @@ namespace Reindeer
 		public Prelude::CountedList<Object<Source, Mask>>
 	{
 	public:
+		typedef ObjectList Type;
+
 		ObjectList(RegionAllocator::ReferenceProvider::Reference allocator = RegionAllocator::ReferenceProvider::DefaultReference::reference)
+		{
+		}
+
+		static void measure(Type &list, ContentMeasurer &measurer)
+		{
+		}
+
+		static void serialize(Type &list, ContentSerializer &serializer)
 		{
 		}
 	};

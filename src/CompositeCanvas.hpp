@@ -11,25 +11,42 @@ namespace Reindeer
 	template<class Source, class Mask, bool Conditional> struct ConditionalCanvas
 	{
 		typedef typename Mask::template Map<ObjectList<Source, Mask> > MaskMap;
-		typedef typename Source::template Map<typename MaskMap::Type> SourceMap;
+		typedef typename Source::template Map<typename MaskMap> SourceMap;
 		typedef typename SourceMap::Type Map;
 		
 		static ObjectList<Source, Mask> &get_list(Map &map, typename Source::ArgumentType source, typename Mask::ArgumentType mask)
 		{
 			return MaskMap::resolve(SourceMap::resolve(map, source), mask);
 		};
+		
+		static void measure(Map &map, ContentMeasurer &measurer)
+		{
+			SourceMap::measure(map, measurer);
+		}
+
+		static void serialize(Map &map, ContentSerializer &serializer)
+		{
+		}
 	};
 	
 	template<class Source, class Mask> struct ConditionalCanvas<Source, Mask, false>
 	{
 		typedef typename Source::template Map<ObjectList<Source, Mask> > SourceMap;
-		typedef typename Mask::template Map<typename SourceMap::Type> MaskMap;
+		typedef typename Mask::template Map<typename SourceMap> MaskMap;
 		typedef typename MaskMap::Type Map;
 
 		static ObjectList<Source, Mask> &get_list(Map &map, typename Source::ArgumentType source, typename Mask::ArgumentType mask)
 		{
 			return SourceMap::resolve(MaskMap::resolve(map, mask), source);
 		};
+		
+		static void measure(Map &map, ContentMeasurer &measurer)
+		{
+		}
+
+		static void serialize(Map &map, ContentSerializer &serializer)
+		{
+		}
 	};
 
 	template<class Source, class Mask> class CompositeCanvas
@@ -62,6 +79,8 @@ namespace Reindeer
 		void measure(ContentMeasurer &measurer)
 		{
 			measurer.count_objects<Content>(1);
+
+			Conditional::measure(map, measurer);
 			
 			// TODO: Add a conditional for debug test
 
@@ -72,6 +91,8 @@ namespace Reindeer
 		{
 			serializer.write_object<Content>();
 			
+			Conditional::serialize(map, serializer);
+
 			// TODO: Add a conditional for debug test
 
 			size_t &magic = serializer.write_object<size_t>();
