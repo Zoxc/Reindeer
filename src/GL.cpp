@@ -19,7 +19,7 @@ bool gluLinkProgram(GLuint program)
 
 		glGetProgramInfoLog(program, log_length, &chars_written, log);
 
-		printf("Failed to link program: \n%s", log);
+		std::cout << "Failed to link program: \n" << log;
 
 		free(log);
 		
@@ -63,7 +63,7 @@ bool gluCompileShader(GLuint program, GLenum type, const char *source)
 
 		glGetShaderInfoLog(shader, log_length, &chars_written, log);
 
-		printf("Failed to compile shader: \n%s", log);
+		std::cout << "Failed to compile shader: \n" << log;
 		
 		free(log);
 
