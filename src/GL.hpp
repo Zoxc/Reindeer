@@ -6,6 +6,9 @@
 	#define glClearDepth glClearDepthf
 #else
 	#include <GLee.h>
+
+	// Remove X11 macro if it was included
+	#undef None
 #endif
 
 bool gluCompileShader(GLuint program, GLenum type, const char *source);

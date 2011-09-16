@@ -13,7 +13,7 @@ namespace Reindeer
 		typedef typename Mask::template Map<ObjectList<Source, Mask> > MaskMap;
 		typedef typename Source::template Map<MaskMap> SourceMap;
 		typedef typename SourceMap::Type Map;
-		typedef typename SourceMap PrimaryMap;
+		typedef SourceMap PrimaryMap;
 		
 		static ObjectList<Source, Mask> &get_list(Map &map, typename Source::ArgumentType source, typename Mask::ArgumentType mask)
 		{
@@ -26,7 +26,7 @@ namespace Reindeer
 		typedef typename Source::template Map<ObjectList<Source, Mask> > SourceMap;
 		typedef typename Mask::template Map<SourceMap> MaskMap;
 		typedef typename MaskMap::Type Map;
-		typedef typename MaskMap PrimaryMap;
+		typedef MaskMap PrimaryMap;
 
 		static ObjectList<Source, Mask> &get_list(Map &map, typename Source::ArgumentType source, typename Mask::ArgumentType mask)
 		{

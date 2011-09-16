@@ -74,9 +74,9 @@ namespace Reindeer
 		}
 	};
 	
-	template<> static typename SourceSolid::ArgumentType CanvasFriend::get_source_state<SourceSolid>(Canvas &canvas);
-	template<> static typename SourceTexture::ArgumentType CanvasFriend::get_source_state<SourceTexture>(Canvas &canvas);
-	template<> static typename MaskNone::ArgumentType CanvasFriend::get_mask_state<MaskNone>(Canvas &canvas);
-	template<> static typename MaskSolid::ArgumentType CanvasFriend::get_mask_state<MaskSolid>(Canvas &canvas);
-	template<> static typename MaskTexture::ArgumentType CanvasFriend::get_mask_state<MaskTexture>(Canvas &canvas);
+	template<> typename SourceSolid::ArgumentType CanvasFriend::get_source_state<SourceSolid>(Canvas &canvas);
+	template<> typename SourceTexture::ArgumentType CanvasFriend::get_source_state<SourceTexture>(Canvas &canvas);
+	template<> typename MaskNone::ArgumentType CanvasFriend::get_mask_state<MaskNone>(Canvas &canvas);
+	template<> typename MaskSolid::ArgumentType CanvasFriend::get_mask_state<MaskSolid>(Canvas &canvas);
+	template<> typename MaskTexture::ArgumentType CanvasFriend::get_mask_state<MaskTexture>(Canvas &canvas);
 };

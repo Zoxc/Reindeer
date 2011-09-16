@@ -4,6 +4,12 @@
 #include "GL.hpp"
 #include "../include/Reindeer/Canvas.hpp"
 
+#ifdef _MSC_VER
+	#define REINDEER_SCOPE(name)
+#else
+	#define REINDEER_SCOPE(name) name::
+#endif
+
 namespace Reindeer
 {
 	class Texture;
