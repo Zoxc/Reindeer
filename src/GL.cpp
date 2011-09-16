@@ -1,4 +1,5 @@
-#include <stdio.h>
+#include <iostream>
+#include <assert.h>
 #include "GL.hpp"
 
 bool gluLinkProgram(GLuint program)
@@ -28,6 +29,17 @@ bool gluLinkProgram(GLuint program)
     }
 	
 	return true;
+}
+
+void gluRaiseErrors()
+{
+	GLenum gl_error = glGetError();
+
+	if(gl_error)
+	{
+		std::cout << "glGetError returned " << gl_error << "\n";
+		assert(0);
+	}
 }
 
 bool gluCompileShader(GLuint program, GLenum type, const char *source)

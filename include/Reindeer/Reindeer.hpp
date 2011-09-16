@@ -5,5 +5,5 @@
 
 namespace Reindeer
 {
-	void initialize(int width, int height);
+	void initialize(size_t width, size_t height);
 };

@@ -3,6 +3,8 @@
 #include <Reindeer/Canvas.hpp>
 #include <swl.h>
 #include <stdio.h>
+#include <string>
+#include <math.h>
 
 using namespace Prelude;
 
@@ -25,13 +27,13 @@ int main()
 
 	auto &canvas = context.add_layer();
 	
-	canvas.set_source(Reindeer::color_white);
-	canvas.set_mask(Reindeer::alpha_opaque);
+	canvas.set_source(0xFF0000FF);
+	canvas.clear_mask();
 	
 	canvas.rect(10, 10, 20, 20);
 
 	auto layer = context.render();
-	
+
 	struct swl_event event;
 
 	while(1)
@@ -47,9 +49,9 @@ int main()
 				break;
 			};
 		}
-
-		layer->render();
 		
+		layer->render();
+
 		swl_swap();
 	}
 

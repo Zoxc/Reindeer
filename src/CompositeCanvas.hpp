@@ -13,20 +13,12 @@ namespace Reindeer
 		typedef typename Mask::template Map<ObjectList<Source, Mask> > MaskMap;
 		typedef typename Source::template Map<MaskMap> SourceMap;
 		typedef typename SourceMap::Type Map;
+		typedef typename SourceMap PrimaryMap;
 		
 		static ObjectList<Source, Mask> &get_list(Map &map, typename Source::ArgumentType source, typename Mask::ArgumentType mask)
 		{
 			return MaskMap::resolve(SourceMap::resolve(map, source), mask);
 		};
-		
-		static void measure(Map &map, ContentMeasurer &measurer)
-		{
-			SourceMap::measure(map, measurer);
-		}
-
-		static void serialize(Map &map, ContentSerializer &serializer)
-		{
-		}
 	};
 	
 	template<class Source, class Mask> struct ConditionalCanvas<Source, Mask, false>
@@ -34,19 +26,12 @@ namespace Reindeer
 		typedef typename Source::template Map<ObjectList<Source, Mask> > SourceMap;
 		typedef typename Mask::template Map<SourceMap> MaskMap;
 		typedef typename MaskMap::Type Map;
+		typedef typename MaskMap PrimaryMap;
 
 		static ObjectList<Source, Mask> &get_list(Map &map, typename Source::ArgumentType source, typename Mask::ArgumentType mask)
 		{
 			return SourceMap::resolve(MaskMap::resolve(map, mask), source);
 		};
-		
-		static void measure(Map &map, ContentMeasurer &measurer)
-		{
-		}
-
-		static void serialize(Map &map, ContentSerializer &serializer)
-		{
-		}
 	};
 
 	template<class Source, class Mask> class CompositeCanvas
@@ -57,18 +42,39 @@ namespace Reindeer
 		typename Conditional::Map map;
 
 	public:
+		struct StaticData 
+		{
+			GLuint program;
+			GLuint scene_uniform;
+
+			typename Source::State source_state;
+			typename Mask::State mask_state;
+		};
+		
+		static StaticData static_data;
+
 		class Content:
 			public Layer::Content
 		{
 			public:
 				void render(ContentWalker &walker)
 				{
+					glUseProgram(static_data.program);
+
+					glEnableVertexAttribArray(0);
+
+					glUniform2f(static_data.scene_uniform, 400.0f, 240.0f);
+
 					walker.read_object<Content>();
+
+					Conditional::PrimaryMap::render(walker, static_data);
 				}
 
 				void deallocate(ContentWalker &walker)
 				{
 					walker.read_object<Content>();
+					
+					Conditional::PrimaryMap::deallocate(walker);
 				}
 		};
 
@@ -80,7 +86,7 @@ namespace Reindeer
 		{
 			measurer.count_objects<Content>(1);
 
-			Conditional::measure(map, measurer);
+			Conditional::PrimaryMap::measure(map, measurer);
 			
 			// TODO: Add a conditional for debug test
 
@@ -91,7 +97,7 @@ namespace Reindeer
 		{
 			serializer.write_object<Content>();
 			
-			Conditional::serialize(map, serializer);
+			Conditional::PrimaryMap::serialize(map, serializer);
 
 			// TODO: Add a conditional for debug test
 
@@ -105,13 +111,7 @@ namespace Reindeer
 			return Conditional::get_list(map, source, mask);
 		};
 
-		static GLuint program;
-		static GLuint scene_uniform;
-		
-		static typename Source::State source_state;
-		static typename Mask::State mask_state;
-
-		static void initialize()
+		static void initialize(size_t width, size_t height)
 		{
 			std::string vertex_shader = "precision highp float;";
 				
@@ -143,23 +143,25 @@ namespace Reindeer
 
 			fragment_shader += "}";
 
-			program = glCreateProgram();
+			static_data.program = glCreateProgram();
 			
-			gluCompileShader(program, GL_VERTEX_SHADER, vertex_shader.c_str());
-			gluCompileShader(program, GL_FRAGMENT_SHADER, fragment_shader.c_str());
+			gluCompileShader(static_data.program, GL_VERTEX_SHADER, vertex_shader.c_str());
+			gluCompileShader(static_data.program, GL_FRAGMENT_SHADER, fragment_shader.c_str());
 			
-			gluLinkProgram(program);
+			glBindAttribLocation(static_data.program, 0, "point");
+
+			gluLinkProgram(static_data.program);
 			
-			Source::initialize_state(source_state, program);
-			Mask::initialize_state(mask_state, program);
+			Source::initialize_state(static_data.source_state, static_data.program);
+			Mask::initialize_state(static_data.mask_state, static_data.program);
 			
-			scene_uniform = glGetUniformLocation(program, "scene");
+			static_data.scene_uniform = glGetUniformLocation(static_data.program, "scene");
+
+			glUseProgram(static_data.program);
+
+			glUniform2f(static_data.scene_uniform, width / 2.0f, height / 2.0f);
 		}
 	};
 	
-	template<class Source, class Mask> GLuint CompositeCanvas<Source, Mask>::program;
-	template<class Source, class Mask> GLuint CompositeCanvas<Source, Mask>::scene_uniform;
-
-	template<class Source, class Mask> typename Source::State CompositeCanvas<Source, Mask>::source_state;
-	template<class Source, class Mask> typename Mask::State CompositeCanvas<Source, Mask>::mask_state;
+	template<class Source, class Mask> typename CompositeCanvas<Source, Mask>::StaticData CompositeCanvas<Source, Mask>::static_data;
 };

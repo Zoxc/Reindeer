@@ -9,7 +9,9 @@ include $(root)/src/Makefile.shared
 TARGET = $(CFG)/libReindeer.a
 
 SOURCES = \
+	Buffer.cpp \
 	Canvas.cpp \
+	CanvasFriend.cpp \
 	Common.cpp \
 	ContentSerializer.cpp \
 	GL.cpp \

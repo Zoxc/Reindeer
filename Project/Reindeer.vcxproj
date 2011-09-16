@@ -11,7 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Buffer.cpp" />
     <ClCompile Include="..\src\Canvas.cpp" />
+    <ClCompile Include="..\src\CanvasFriend.cpp" />
     <ClCompile Include="..\src\Common.cpp" />
     <ClCompile Include="..\src\ContentSerializer.cpp" />
     <ClCompile Include="..\src\GL.cpp" />
@@ -29,6 +31,7 @@
     <ClInclude Include="..\include\Reindeer\Layer.hpp" />
     <ClInclude Include="..\include\Reindeer\LayerContext.hpp" />
     <ClInclude Include="..\include\Reindeer\Reindeer.hpp" />
+    <ClInclude Include="..\src\Buffer.hpp" />
     <ClInclude Include="..\src\CanvasFriend.hpp" />
     <ClInclude Include="..\src\Common.hpp" />
     <ClInclude Include="..\src\CompositeCanvas.hpp" />

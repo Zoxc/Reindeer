@@ -7,12 +7,12 @@ namespace Reindeer
 	{
 		static void func(Canvas &canvas, Rect &rect)
 		{
-			auto composite_canvas = *CanvasFriend::get_composite_canvas<Source, Mask, true>(canvas);
+			auto &composite_canvas = *CanvasFriend::get_composite_canvas<Source, Mask, true>(canvas);
 			
 			typename Source::ArgumentType source = CanvasFriend::get_source_state<Source>(canvas);
 			typename Mask::ArgumentType mask = CanvasFriend::get_mask_state<Mask>(canvas);
 
-			auto object_list = composite_canvas.get_list(source, mask);
+			auto &object_list = composite_canvas.get_list(source, mask);
 
 			auto object = new (CanvasFriend::get_region(canvas)) Object<Source, Mask>(source, mask, rect);
 
@@ -36,6 +36,7 @@ namespace Reindeer
 	void Canvas::set_source(color_t color)
 	{
 		source_type = Source::Solid;
+		source_color = color;
 	}
 
 	void Canvas::set_source(Texture *texture)
@@ -46,6 +47,7 @@ namespace Reindeer
 	void Canvas::set_mask(color_t color)
 	{
 		mask_type = Mask::Solid;
+		mask_color = color;
 	}
 
 	void Canvas::set_mask(Texture *texture)
@@ -70,17 +72,14 @@ namespace Reindeer
 		CanvasFriend::source_dispatch<SourceDestination, Canvas &, Rect &>(source_type, *this, rect);
 	}
 	
-	void initialize(int width, int height)
-	{
-	}
-	
 	template<class Source, class Mask> struct MeasureMaskDestionation
 	{
 		static void func(Canvas &canvas, ContentMeasurer &measurer)
 		{
 			auto composite_canvas = CanvasFriend::get_composite_canvas<Source, Mask, false>(canvas);
 
-			composite_canvas->measure(measurer);
+			if(composite_canvas)
+				composite_canvas->measure(measurer);
 		}
 	};
 
@@ -104,8 +103,9 @@ namespace Reindeer
 		static void func(Canvas &canvas, ContentSerializer &serializer)
 		{
 			auto composite_canvas = CanvasFriend::get_composite_canvas<Source, Mask, false>(canvas);
-
-			composite_canvas->serialize(serializer);
+			
+			if(composite_canvas)
+				composite_canvas->serialize(serializer);
 		}
 	};
 

@@ -40,7 +40,7 @@ namespace Reindeer
 		void write_list(size_t list_entries);
 		char *get_position();
 		
-		template<class Map, typename func> void write_map(const Map &map, func each_pair)
+		template<class Map, typename func> void write_map(Map &map, func each_pair)
 		{
 			write_list(map.get_entries());
 

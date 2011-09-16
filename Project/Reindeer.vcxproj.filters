@@ -45,6 +45,12 @@
     <ClCompile Include="..\src\LayerContext.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Buffer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CanvasFriend.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Common.hpp">
@@ -94,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Reindeer\LayerContext.hpp">
       <Filter>include\Reindeer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Buffer.hpp">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

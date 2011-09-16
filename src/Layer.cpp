@@ -1,6 +1,7 @@
 #include <cassert>
 #include <cstdlib>
 #include "ContentSerializer.hpp"
+#include "GL.hpp"
 #include "../include/Reindeer/Layer.hpp"
 
 namespace Reindeer
@@ -39,5 +40,7 @@ namespace Reindeer
 			// TODO: Add a conditional for debug test
 			assert(walker.read_object<size_t>() == 0xBEEF);
 		}
+
+		gluRaiseErrors();
 	}
 };

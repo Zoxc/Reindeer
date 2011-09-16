@@ -1,5 +1,6 @@
 #pragma once
 #include "Common.hpp"
+#include "ContentSerializer.hpp"
 
 namespace Reindeer
 {
@@ -44,6 +45,16 @@ namespace Reindeer
 			static void serialize(Type &inner, ContentSerializer &serializer)
 			{
 				Inner::serialize(inner, serializer);
+			}
+			
+			template<class T> static void render(ContentWalker &walker, T &static_data)
+			{
+				Inner::render(walker, static_data);
+			}
+			
+			static void deallocate(ContentWalker &walker)
+			{
+				Inner::deallocate(walker);
 			}
 		};
 	};
